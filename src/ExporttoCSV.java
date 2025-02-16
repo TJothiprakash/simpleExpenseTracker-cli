@@ -15,6 +15,8 @@ public class ExporttoCSV {
         try (PrintWriter writer = new PrintWriter(new File(filename))) {
             StringBuilder sb = new StringBuilder();
             sb.append("Name,Amount,Category,Date,Note\n");
+
+            System.out.println("Exporting expenses to CSV...");
             for (Expense expense : expenses) {
                 sb.append(expense.getName()).append(",");
                 sb.append(expense.getAmount()).append(",");
@@ -24,8 +26,13 @@ public class ExporttoCSV {
             }
             writer.write(sb.toString());
             System.out.println("Expenses exported to: " + filename);
+
+            // ✅ Clear the list after writing
+            expenses.clear();
+
         } catch (FileNotFoundException e) {
             System.out.println("Error exporting CSV: " + e.getMessage());
         }
     }
+
 }
